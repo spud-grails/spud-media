@@ -23,12 +23,12 @@ class MediaController {
 
         if(!media.save(flush:true)) {
             flash.error("Error Uploading Attachment")
-            redirect action: 'index'
+            redirect resource: 'media', namespace: 'spud_admin', action: 'index'
             return
         }
 
-        flash.notice = 'Successfully uploaded ${media.attachment?.fileName}'
-        redirect action: 'index'
+        flash.notice = "Successfully uploaded ${media.attachment?.fileName}"
+        redirect resource: 'media', namespace: 'spud_admin', action: 'index'
     }
 
     def delete() {
@@ -38,14 +38,14 @@ class MediaController {
         }
 
         media.delete(flush:true)
-        redirect action: 'index'
+        redirect resource: 'media', namespace: 'spud_admin', action: 'index'
     }
 
     private loadMedia() {
         def media = SpudMedia.get(params.long('id'))
         if(!media) {
             flash.error = 'Media Object not found!'
-            redirect action: 'index'
+            redirect resource: 'media', namespace: 'spud_admin', action: 'index'
             return false
         }
         return media

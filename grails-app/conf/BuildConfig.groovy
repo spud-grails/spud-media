@@ -24,12 +24,27 @@ grails.project.dependency.resolution = {
 
     plugins {
         runtime ":asset-pipeline:1.9.9"
-        runtime ":selfie:0.2.0"
+
+
+        if(System.getProperty('plugin.mode') != 'local') {
+            runtime ":selfie:0.3.5"
+            runtime ":spud-core:0.6.0"
+
+            runtime(':hibernate4:4.3.5.4') {
+                export = false
+            }
+        }
+
         build(":release:3.0.1",
-              ":rest-client-builder:1.0.3",
-              ":hibernate:3.6.10.7"
+              ":rest-client-builder:1.0.3"
               ) {
             export = false
         }
     }
+}
+
+if(System.getProperty('plugin.mode') == 'local') {
+    grails.plugin.location."spud-core" = "../spud-core"
+    grails.plugin.location."selfie" = "../../plugins/selfie"
+
 }

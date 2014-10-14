@@ -25,6 +25,7 @@ class SpudMediaGrailsPlugin {
 
     def doWithSpring = {
         // TODO Implement runtime spring config (optional)
+        applyDefaultConfiguration(application.config)
     }
 
     def doWithDynamicMethods = { ctx ->
@@ -44,9 +45,28 @@ class SpudMediaGrailsPlugin {
     def onConfigChange = { event ->
         // TODO Implement code that is executed when the project configuration changes.
         // The event is the same as for 'onChange'.
+        applyDefaultConfiguration(application.config)
     }
 
     def onShutdown = { event ->
         // TODO Implement code that is executed when the application shuts down (optional)
+    }
+
+    def applyDefaultConfiguration(config) {
+        if(!config.grails.plugin.selfie.domain.containsKey('spudMedia') && !config.grails.plugin.selfie.containsKey('storage')) {
+            def mapping = config.grails.plugin.karman.serveLocalMapping ?: 'storage'
+            def basePath = config.grails.plugin.karman.storagePath ?: 'storage'
+            def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
+            config.grails.plugin.selfie.domain.'spudMedia' = [
+                storage: [
+                    bucket: 'default',
+                    providerOptions: [
+                        provider:'local',
+                        basePath: basePath,
+                        baseUrl:"http://localhost:8080${servletContext.contextPath ?: ''}/${mapping}"
+                    ]
+                ]
+            ]
+        }
     }
 }

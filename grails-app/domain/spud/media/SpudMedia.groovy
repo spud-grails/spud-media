@@ -1,17 +1,19 @@
 package spud.media
 
 import com.bertramlabs.plugins.selfie.Attachment
-import com.bertramlabs.plugins.selfie.AttachmentUserType
 
 class SpudMedia {
 
+    static transients = ['imageFromType']
+
     static attachmentOptions = [
-        attachment: [
-            styles: [
-                thumb: [width: 50, height: 50, mode: 'fit'],
-                medium: [width: 250, height: 250, mode: 'scale']
-            ]
-        ]
+    attachment: [
+    styles: [
+    thumb: [width: 50, height: 50, mode: 'fit'],
+    medium: [width: 250, height: 250, mode: 'scale']
+    ]
+
+    ]
     ]
 
     Attachment attachment
@@ -32,7 +34,7 @@ class SpudMedia {
         cropH nullable:true
         cropS nullable:true
     }
-
+    static embedded = ['attachment']
     static mapping = {
         def cfg = it?.getBean('grailsApplication')?.config
         datasource(cfg?.spud?.core?.datasource ?: 'DEFAULT')
@@ -41,11 +43,30 @@ class SpudMedia {
         autoTimestamp true
         dateCreated column: 'created_at'
         lastUpdated column: 'updated_at'
+    }
 
-        attachment type: AttachmentUserType, {
-            column name: "attachment_file_name"
-            column name: "attachment_file_size"
-            column name: "attachment_content_type"
+
+    public String getImageFromType() {
+        if(isImage()) {
+            return attachment.url('thumb')
+        }
+        return ''
+    }
+
+    def isImage() {
+        println "Checking COntent ${attachment?.contentType}"
+        if(attachment?.contentType?.contains('jpeg') || attachment?.contentType?.contains('jpg') || attachment?.contentType?.contains('png') || attachment?.contentType?.contains('gif')) {
+            true
+        } else {
+            false
+        }
+    }
+
+    def isPdf() {
+        if(attachment?.contentType?.contains('pdf')) {
+            true
+        } else {
+            false
         }
     }
 }
