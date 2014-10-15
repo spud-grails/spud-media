@@ -16,10 +16,10 @@
     </div>
 
     <div class="spud_media_picker_tab_body spud_media_picker_tab_upload">
-		<g:uploadForm name="upload" url="[action:'save',resource:'media',namespace:'spud_admin',format: 'POST']" class="spud_media_picker_upload_form" target="spud_media_picker_upload_target">
+		<g:uploadForm name="upload" url="[action:'save',resource:'mediaPicker',namespace:'spud_admin',format: 'POST']" class="spud_media_picker_upload_form" target="spud_media_picker_upload_target">
 				<label for="media.attachment">Upload New File</label>
 
-				<input type="file" name="media.attachment" /><br/>
+				<input type="file" name="media.attachment" id="spud_media_attachment" /><br/>
 
 
 				<div class="progress progress-striped active spud_media_picker_upload_progress">

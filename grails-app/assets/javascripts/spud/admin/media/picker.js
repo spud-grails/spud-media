@@ -72,7 +72,7 @@ spud.admin.mediapicker = new function(){
       var file = form.find('#spud_media_attachment')[0].files[0];
       fd.append('_method', form.find('[name=_method]').val());
       fd.append('authenticity_token', form.find('[name=authenticity_token]').val());
-      fd.append('spud_media[attachment]', file);
+      fd.append('media.attachment', file);
 
       // upload via xhr
       var xhr = new XMLHttpRequest();
@@ -116,7 +116,7 @@ spud.admin.mediapicker = new function(){
     $('.spud_media_picker_list').prepend(html);
     $('.spud_media_picker_item').first().click();
     self.goToTab('#spud_media_picker_tab_choose');
-    self.resetUplaodForm();
+    self.resetUploadForm();
   };
 
   this.resetUploadForm = function(){
