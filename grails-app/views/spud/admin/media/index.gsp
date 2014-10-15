@@ -9,7 +9,7 @@
 				<div class="page_row">
 
 				<span class="row_meta">
-					<img src="${mediaItem.imageFromType}" class="size-50-thumb" />
+					<img src="${mediaItem.isImage() ? mediaItem.attachment.url('thumb') : sp.imageFromType(contentType: mediaItem.attachment.contentType) }" class="size-50-thumb" />
 					<g:link url="${mediaItem.attachment.url('original')}">${mediaItem.attachment.fileName}</g:link>
 				</span>
 

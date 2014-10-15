@@ -7,8 +7,14 @@ import  spud.blog.*
 @SpudSecure(['MEDIA'])
 class MediaPickerController {
 	static namespace="spud_admin"
+	def spudMultiSiteService
+
 	def index() {
-		def media = SpudMedia.list([sort: 'dateCreated', order:'desc'] + params)
+		def mediaCriteria = {
+			eq('siteId',spudMultiSiteService.activeSite.siteId)
+		}
+		def media = SpudMedia.createCriteria().list([sort: 'dateCreated', order:'desc'] + params,mediaCriteria)
+
 		render view: '/spud/admin/mediaPicker/index', model: [media: media]
 	}
 

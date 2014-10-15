@@ -8,9 +8,15 @@ import  spud.blog.*
 @SpudSecure(['MEDIA'])
 class MediaController {
     static namespace = "spud_admin"
+
+    def spudMultiSiteService
+
     def index() {
-        def media = SpudMedia.list([sort: 'dateCreated', order:'desc', max:25] + params)
-        render view: '/spud/admin/media/index', model: [media: media, mediaCount: SpudMedia.count()]
+        def mediaCriteria = {
+			eq('siteId',spudMultiSiteService.activeSite.siteId)
+        }
+        def media = SpudMedia.createCriteria().list([sort: 'dateCreated', order:'desc', max:25] + params,mediaCriteria)
+        render view: '/spud/admin/media/index', model: [media: media, mediaCount: SpudMedia.createCriteria().count(mediaCriteria)]
     }
 
     def create() {
@@ -42,7 +48,7 @@ class MediaController {
     }
 
     private loadMedia() {
-        def media = SpudMedia.get(params.long('id'))
+        def media = SpudMedia.findBySiteIdAndId(spudMultiSiteService.activeSite.siteId ?: 0,params.long('id'))
         if(!media) {
             flash.error = 'Media Object not found!'
             redirect resource: 'media', namespace: 'spud_admin', action: 'index'

@@ -27,7 +27,7 @@
 				</div>
 				<div class="spud_media_picker_buttons">
 					<g:submitButton name="update" value="Upload" class="btn btn-primary btn-xs spud_media_picker_tab_upload_submit"/>
-					<a href="#" class="btn btn-xs spud_media_picker_button_cancel">Cancel</a>
+					<a href="#" class="btn btn-xs btn-default spud_media_picker_button_cancel">Cancel</a>
 				</div>
 
 		</g:uploadForm>
@@ -47,8 +47,8 @@
         </ul>
       </div>
       <div class="spud_media_picker_buttons">
-        <a href='#' class='btn btn-mini btn-primary spud_media_picker_button_use_selected'>Use Selected</a>
-        <a href='#' class='btn btn-mini btn-primary spud_media_picker_button_cancel'>Cancel</a>
+        <a href='#' class='btn btn-xs btn-primary spud_media_picker_button_use_selected'>Use Selected</a>
+        <a href='#' class='btn btn-xs btn-default spud_media_picker_button_cancel'>Cancel</a>
       </div>
     </div>
 
@@ -89,8 +89,8 @@
         <input name="spud_media_picker_option_dimension_w" type="text" placeholder="auto" /> px by <input name="spud_media_picker_option_dimension_h" type="text" placeholder="auto" /> px
       </div>
       <div class="spud_media_picker_buttons">
-        <a href='#' class="btn btn-mini btn-primary spud_media_picker_button_insert">Insert</a>
-        <a href='#' class="btn btn-mini btn-primary spud_media_picker_button_cancel">Cancel</a>
+        <a href='#' class="btn btn-xs btn-primary spud_media_picker_button_insert">Insert</a>
+        <a href='#' class="btn btn-xs btn-default spud_media_picker_button_cancel">Cancel</a>
 
       </div>
     </div>

@@ -24,6 +24,7 @@ class SpudMedia {
     Integer cropS
 
     Boolean isProtected=false
+    Integer siteId=0
     Date dateCreated
     Date lastUpdated
 
@@ -45,13 +46,6 @@ class SpudMedia {
         lastUpdated column: 'updated_at'
     }
 
-
-    public String getImageFromType() {
-        if(isImage()) {
-            return attachment.url('thumb')
-        }
-        return ''
-    }
 
     def isImage() {
         println "Checking COntent ${attachment?.contentType}"
