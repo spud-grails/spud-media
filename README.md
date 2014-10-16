@@ -54,5 +54,5 @@ and you should see a Media module on your dashboard (depending on which is enabl
 
 ## Additional Resources
 
-* Write your blog posts with Markdown using [spud-markdown](http://github.com/spud-grails/spud-markdown)!
+* Write your blog posts with [spud-blog](http://github.com/spud-grails/spud-blog)!
 * Drop into a content management system with [spud-cms](http://github.com/spud-grails/spud-cms)!
