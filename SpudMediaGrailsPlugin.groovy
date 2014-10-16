@@ -1,12 +1,10 @@
 class SpudMediaGrailsPlugin {
-    // the plugin version
     def version = "0.6.0"
-    // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.3 > *"
-    // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/views/error.gsp"
     ]
+    def loadAfter = ['spud-core']
 
     def title = "Spud Media Plugin" // Headline display name of the plugin
     def author = "David Estes"
