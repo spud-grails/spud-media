@@ -21,7 +21,7 @@ repositories {
 	mavenRepo 'http://dl.bintray.com/karman/karman'
 }
 plugins {
-  compile ':spud-media:0.6.0'
+  compile ':spud-media:0.6.1'
 }
 ```
 
