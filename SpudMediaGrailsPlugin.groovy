@@ -1,5 +1,5 @@
 class SpudMediaGrailsPlugin {
-    def version = "0.6.0"
+    def version = "0.6.1"
     def grailsVersion = "2.3 > *"
     def pluginExcludes = [
         "grails-app/views/error.gsp"
@@ -15,6 +15,7 @@ class SpudMediaGrailsPlugin {
     def license = "APACHE"
     def organization = [name: "Bertram Labs", url: "http://www.bertramlabs.com/"]
     def issueManagement = [system: "GITHUB", url: "https://github.com/spud-grails/spud-media/issues"]
+    def scm             = [url: "https://github.com/spud-grails/spud-media"]
 
     def doWithSpring = {
         applyDefaultConfiguration(application.config)
