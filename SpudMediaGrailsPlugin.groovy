@@ -1,12 +1,11 @@
+import org.codehaus.groovy.grails.web.context.ServletContextHolder as SCH
+
 class SpudMediaGrailsPlugin {
     def version = "0.6.1"
     def grailsVersion = "2.3 > *"
-    def pluginExcludes = [
-        "grails-app/views/error.gsp"
-    ]
     def loadAfter = ['spud-core']
 
-    def title = "Spud Media Plugin" // Headline display name of the plugin
+    def title = "Spud Media Plugin"
     def author = "David Estes"
     def authorEmail = "destes@bcap.com"
     def description = 'Provides Media management for Spud'
@@ -21,26 +20,28 @@ class SpudMediaGrailsPlugin {
         applyDefaultConfiguration(application.config)
     }
 
-
     def onConfigChange = { event ->
         applyDefaultConfiguration(application.config)
     }
 
     def applyDefaultConfiguration(config) {
-        if(!config.grails.plugin.selfie.domain.containsKey('spudMedia') && !config.grails.plugin.selfie.containsKey('storage')) {
-            def mapping = config.grails.plugin.karman.serveLocalMapping ?: 'storage'
-            def basePath = config.grails.plugin.karman.storagePath ?: 'storage'
-            def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
-            config.grails.plugin.selfie.domain.'spudMedia' = [
-                storage: [
-                    bucket: 'default',
-                    providerOptions: [
-                        provider:'local',
-                        basePath: basePath,
-                        baseUrl:"http://localhost:8080${servletContext?.contextPath ?: ''}/${mapping}"
-                    ]
+        def selfieConf = config.grails.plugin.selfie
+        if (selfieConf.domain.containsKey('spudMedia') || selfieConf.containsKey('storage')) {
+            return
+        }
+
+        def karmanConf = config.grails.plugin.karman
+        def mapping = karmanConf.serveLocalMapping ?: 'storage'
+        def basePath = karmanConf.storagePath ?: 'storage'
+        selfieConf.domain.spudMedia = [
+            storage: [
+                bucket: 'default',
+                providerOptions: [
+                    provider:'local',
+                    basePath: basePath,
+                    baseUrl:"http://localhost:8080${SCH.servletContext?.contextPath ?: ''}/${mapping}"
                 ]
             ]
-        }
+        ]
     }
 }

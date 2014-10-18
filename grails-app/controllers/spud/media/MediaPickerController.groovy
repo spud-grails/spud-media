@@ -1,8 +1,6 @@
 package spud.media
 
-import  spud.core.*
-import  spud.security.*
-import  spud.blog.*
+import spud.core.SpudSecure
 
 @SpudSecure(['MEDIA'])
 class MediaPickerController {
@@ -19,17 +17,13 @@ class MediaPickerController {
 	}
 
 	def save() {
-		println "Trying to save ${params}"
+		log.debug "Trying to save ${params}"
 		def media = new SpudMedia(params.media)
 		if(media.save(flush:true)) {
-			if(request.getHeader('X-Requested-With')) {
-		        render template: '/spud/admin/mediaPicker/media', model: [mediaItem: media]
-				return
-			} else {
-				render template: '/spud/admin/mediaPicker/media', model: [mediaItem: media]
-				return
-			}
+			render template: '/spud/admin/mediaPicker/media', model: [mediaItem: media]
 		}
-		render text:'', status: 422
+		else {
+			render text:'', status: 422
+		}
 	}
 }
