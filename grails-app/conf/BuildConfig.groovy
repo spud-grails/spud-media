@@ -17,7 +17,7 @@ grails.project.dependency.resolution = {
         runtime ":asset-pipeline:1.9.9"
 
         if (System.getProperty('plugin.mode') != 'local') {
-            runtime ":selfie:0.3.5"
+            runtime ":selfie:0.4.1"
             runtime ":spud-core:0.6.1"
 
             runtime(':hibernate4:4.3.5.4') {

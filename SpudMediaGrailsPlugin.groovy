@@ -1,7 +1,7 @@
 import org.codehaus.groovy.grails.web.context.ServletContextHolder as SCH
 
 class SpudMediaGrailsPlugin {
-    def version = "0.6.3"
+    def version = "0.6.4"
     def grailsVersion = "2.3 > *"
     def loadAfter = ['spud-core']
 
