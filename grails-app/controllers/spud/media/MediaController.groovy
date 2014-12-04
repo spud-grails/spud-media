@@ -25,6 +25,7 @@ class MediaController {
 
     def save() {
         def media = new SpudMedia(params.media)
+        media.siteId = spudMultiSiteService.activeSite.siteId
 
         if(!media.save(flush:true)) {
             flash.error("Error Uploading Attachment")
