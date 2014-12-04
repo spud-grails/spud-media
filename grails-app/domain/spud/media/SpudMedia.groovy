@@ -36,7 +36,7 @@ class SpudMedia {
     }
     static embedded = ['attachment']
     static mapping = { ctx ->
-        def cfg = ctx?.grailsApplication?.config
+        def cfg = ctx?.getBean('grailsApplication')?.config
         datasource(cfg?.spud?.core?.datasource ?: 'DEFAULT')
         cache true
         table 'spud_media'
