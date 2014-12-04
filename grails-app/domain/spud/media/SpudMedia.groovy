@@ -4,16 +4,15 @@ import com.bertramlabs.plugins.selfie.Attachment
 
 class SpudMedia {
 
-    static transients = ['imageFromType']
+    private static final IMAGE_TYPES = ['jpeg', 'jpg', 'png', 'gif']
 
     static attachmentOptions = [
-    attachment: [
-    styles: [
-    thumb: [width: 50, height: 50, mode: 'fit'],
-    medium: [width: 250, height: 250, mode: 'scale']
-    ]
-
-    ]
+        attachment: [
+            styles: [
+                thumb: [width: 50, height: 50, mode: 'fit'],
+                medium: [width: 250, height: 250, mode: 'scale']
+            ]
+        ]
     ]
 
     Attachment attachment
@@ -36,8 +35,8 @@ class SpudMedia {
         cropS nullable:true
     }
     static embedded = ['attachment']
-    static mapping = {
-        def cfg = it?.getBean('grailsApplication')?.config
+    static mapping = { ctx ->
+        def cfg = ctx?.grailsApplication?.config
         datasource(cfg?.spud?.core?.datasource ?: 'DEFAULT')
         cache true
         table 'spud_media'
@@ -46,22 +45,13 @@ class SpudMedia {
         lastUpdated column: 'updated_at'
     }
 
-
-    def isImage() {
-        println "Checking COntent ${attachment?.contentType}"
-        if(attachment?.contentType?.contains('jpeg') || attachment?.contentType?.contains('jpg') || attachment?.contentType?.contains('png') || attachment?.contentType?.contains('gif')) {
-            true
-        } else {
-            false
-        }
+    boolean isImage() {
+        log.debug "Checking Content ${attachment?.contentType}"
+        IMAGE_TYPES.any { attachment?.contentType?.contains it }
     }
 
-    def isPdf() {
-        if(attachment?.contentType?.contains('pdf')) {
-            true
-        } else {
-            false
-        }
+    boolean isPdf() {
+        attachment?.contentType?.contains('pdf')
     }
 
     def grailsCacheAdminService

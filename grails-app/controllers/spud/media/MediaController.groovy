@@ -1,8 +1,7 @@
 package spud.media
 
-import  spud.core.*
-import  spud.security.*
-import  spud.blog.*
+import spud.core.SpudApp
+import spud.core.SpudSecure
 
 @SpudApp(name="Media", thumbnail="spud/admin/media_icon.png", order="3")
 @SpudSecure(['MEDIA'])
