@@ -10,14 +10,13 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenLocal()
         mavenCentral()
-        mavenRepo 'http://dl.bintray.com/karman/karman'
     }
 
     plugins {
         runtime ":asset-pipeline:1.9.9"
 
         if (System.getProperty('plugin.mode') != 'local') {
-            runtime ":selfie:0.4.1"
+            runtime ":selfie:0.5.0"
             runtime ":spud-core:0.6.1"
 
             runtime(':hibernate4:4.3.5.4') {

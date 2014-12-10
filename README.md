@@ -17,11 +17,10 @@ Add the `spud-media` module to your grails app  (works optimally with other spud
 
 ```groovy
 repositories {
-	//DONT FORGET THIS ATM
-	mavenRepo 'http://dl.bintray.com/karman/karman'
+  //NO MORE CUSTOM REPO
 }
 plugins {
-  compile ':spud-media:0.6.1'
+  compile ':spud-media:0.6.6'
 }
 ```
 
