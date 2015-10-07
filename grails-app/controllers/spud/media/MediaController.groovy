@@ -28,7 +28,10 @@ class MediaController {
         media.siteId = spudMultiSiteService.activeSite.siteId
 
         if(!media.save(flush:true)) {
-            flash.error("Error Uploading Attachment")
+            media.errors.each {
+                log.debug("Error Uploading Attachment \n${it}")
+            }
+            flash.error = "Error Uploading Attachment"
             redirect resource: 'media', namespace: 'spud_admin', action: 'index'
             return
         }
